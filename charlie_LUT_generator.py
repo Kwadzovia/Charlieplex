@@ -38,8 +38,8 @@ def main():
 
                 # pinIndex = 0
                 highByte = (1 << rowCount)
-                lowByte = (1 << rowCount + 1)
-                triByte = (0xFF & ~(lowByte+highByte))
+                lowByte = (1 << (rowCount + 1))
+                triByte = (0xFF & (lowByte+highByte))
 
                 #swap high and low for second input
                 if inputIndex == 1:
@@ -48,10 +48,11 @@ def main():
                     lowByte = temp
         
                 if includeInputNumber:
-                    print("{}\t{{0b{:b},0b{:b},0b{:b}}},".format(pin,triByte,lowByte,highByte))
+                    print("{}\t{{0x{:x},0x{:x},0x{:x}}},".format(pin,triByte,lowByte,highByte))
+                    # print("{}\t{{0b{:b},0b{:b},0b{:b}}},".format(pin,triByte,lowByte,highByte))
                 else:
-                    print("{{0b{:b},0b{:b},0b{:b}}},".format(pin,triByte,lowByte,highByte))
-
+                    print("{{0x{:x},0x{:x},0x{:x}}},".format(triByte,lowByte,highByte))
+                    # print("{{0b{:b},0b{:b},0b{:b}}},".format(triByte,lowByte,highByte))
                 inputIndex = inputIndex + 1
         
         
@@ -64,8 +65,8 @@ def main():
                         currentInput = 2*(numPins-1) + inputIndex
                         if currentInput < numInputs:
                             highByte = (1 << row)
-                            lowByte = (1 << remainingRow)
-                            triByte = (0xFF & ~(lowByte+highByte))
+                            lowByte = (1 << (rowCount + 1))
+                            triByte = (0xFF & (lowByte+highByte))
                             if i == 1:
                                 #swap high and low for second input
                                 temp = highByte
@@ -74,9 +75,12 @@ def main():
                                 
 
                             if includeInputNumber:
-                                print("{}\t{{0b{:b},0b{:b},0b{:b}}},".format(currentInput,triByte,lowByte,highByte))
+                                print("{}\t{{0x{:x},0x{:x},0x{:x}}},".format(currentInput,triByte,lowByte,highByte))
+                                # print("{}\t{{0b{:b},0b{:b},0b{:b}}},".format(currentInput,triByte,lowByte,highByte))
                             else:
-                                print("{{0b{:b},0b{:b},0b{:b}}},".format(currentInput,triByte,lowByte,highByte))
+                                print("{{0x{:x},0x{:x},0x{:x}}},".format(triByte,lowByte,highByte))
+                                # print("{{0b{:b},0b{:b},0b{:b}}},".format(triByte,lowByte,highByte))
+                               
                             inputIndex = inputIndex+1
 
 
